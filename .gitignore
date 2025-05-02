@@ -1,0 +1,6 @@
+# dependencies
+node_modules/
+pkg/
+
+diag-*.svg
+diag-*.png

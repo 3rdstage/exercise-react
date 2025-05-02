@@ -1,0 +1,13 @@
+# https://cspell.org/docs/dictionaries-custom/
+
+iife      # Immediately Invoked Function Expression, https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+
+# bn.js (https://github.com/indutny/bn.js/)
+addn
+subn
+
+
+# chance.js (https://chancejs.com/)
+pickone
+pickset
+

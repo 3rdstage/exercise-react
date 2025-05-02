@@ -1,0 +1,82 @@
+{
+  // https://streetsidesoftware.github.io/cspell/
+  // https://streetsidesoftware.com/vscode-spell-checker/#customization : cspell.json, settings.json
+  // https://streetsidesoftware.com/vscode-spell-checker/docs/configuration
+  // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+
+  // The settings in cspell.json will override the equivalent cSpell settings in VS Code's settings.json.
+
+  //"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  //"version": "0.2",
+
+  // https://streetsidesoftware.com/vscode-spell-checker/docs/configuration/files-folders-and-workspaces
+  "import": ["@cspell/dict-latex/cspell-ext.json"],
+
+  // https://github.com/streetsidesoftware/cspell-dicts/tree/main/dictionaries/cspell
+  //"import": ["@cspell/dict-cspell-bundle/cspell-ext.json"],
+
+  "enableFiletypes": [ "java", "javascript", "typescript",
+                        "python", "python-common",
+                        "bash", "latex", "markdown", "asciidoc" ],
+  // "enabledLanguageIds": [ "asciidoc", "latex" ], // replaced by `enableFiletypes`
+  "ignorePaths": [ ],
+
+
+  //https://streetsidesoftware.com/vscode-spell-checker/docs/configuration/languages-and-dictionaries
+  "language": "en",
+  "words": [
+    "consolas", // Fonts
+    "lucida",
+    "menlo",
+    "circumcircle", // Geometry
+    "webp", // Extensions
+    "websocket", // Techonology Geneal
+    "reentrancy",
+    "emscripten", // https://emscripten.org/
+    "addn", // `bn.js`
+    "subn",
+    "pickone", // `chance.js`
+    "pickset",
+    "varchar", // Database, DBMS
+    "varchar2",
+    "innodb", // MySQL, MariaDB
+    "curdate",
+    "timestampadd",
+    "rlike",
+    "ITCEN"  // Local Companies
+  ],
+  "flagWords": [
+    "hte"
+  ],
+  "languageSettings": [
+    {
+      "languageId": "python",
+      "allowCompoundWords": true,
+      "dictionaries": [ "python" ]
+    }
+  ],
+  "dictionaries": ["abbrev", "software", "hardware", "asciidoc", "latex-ext", "web3"],
+  "dictionaryDefinitions": [
+    { "name": "abbrev", "path": "./cspell/abbrev.txt", "addWords": true },
+    { "name": "software", "path": "./cspell/software.txt", "addWords": true },
+    { "name": "hardware", "path": "./cspell/hardware.txt", "addWords": true },
+    { "name": "asciidoc", "path": "./cspell/asciidoc.txt", "addWords": true },
+    { "name": "latex-ext", "path": "./cspell/latex-ext.txt", "addWords": true },
+    { "name": "web3", "path": "./cspell/web3.txt", "addWords": true }
+  ],
+
+  // https://streetsidesoftware.com/vscode-spell-checker/docs/configuration/cspell
+  "patterns": [
+    { "name" : "ipfs-url", "pattern": "/(?:ipfs|http|https)://.*Qm[0-9A-Za-z]*/"}
+  ],
+  "ignoreRegExpList": ["ipfs-url"],
+  "overrides": [
+    {
+      // https://jshint.com/docs/options/
+      "filename": ".jshintrc",
+      "words": [
+        "esversion", "forin", "latedef", "nofunc", "noarg", "nonew", "quotmark"]
+    }
+  ]
+
+}

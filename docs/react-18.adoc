@@ -1,0 +1,134 @@
+// cspell:words nccmath CISA ISACA SCWCD
+// cspell:ignore
+
+= React v18
+:toc:
+:toclevels: 2
+:toc-title: Contents
+:sectnums:
+:sectnumlevels: 5
+:sectanchors:
+:max-width: 1200px
+:table-frame: ends
+:table-stripes: none
+:imagesdir: ./
+:imagesoutdir: ./resources
+:docinfo: shared-head
+:docinfodir: ../
+:source-highlighter: highlight.js
+:source-indent: 2
+:highlightjs-theme: github
+//:prewrap!:
+:icons: font
+:iconfont-name: font-awesome
+:iconfont-remote:
+:iconfont-cdn: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css
+:stem: latexmath
+
+// https://github.com/asciidoctor/asciidoctor-kroki
+:kroki-fetch-diagram: true
+:kroki-default-format: svg
+:kroki-default-options: inline
+:kroki-server-url: https://kroki.io
+// :plantuml-server-url: "http://plantuml.com/plantuml"
+
+
+== Concepts
+
+=== JSX
+
+* React JSX is an extension to JavaScript. It allows writing a JavaScript code that looks like an HTML code.
+* JSX supports expression in pure JavaScript syntax. Expression has to be enclosed inside the curly braces, `{` `}`. Expression can contain all variables available in the context, where the JSX is defined.
+* It's important to distinguish between setting native HTML attributes, and setting custom React component props.
+* Event handlers must be camelCased : `onClick`, `onKeyDown`
+* JSX supports expression to be specified inside the attributes. In attributes, **double quote should not be used** along with expression.
+
+[source, javascript]
+....
+const element = <h1>Hello React!</h1>
+
+<script type="text/babel">
+  var cTime = new Date().toTimeString();
+  ReactDOM.render(
+    <div><p>The current time is {cTime}</p></div>,
+    document.getElementById('react-app') );
+</script>
+....
+
+[%nowrap, javascript]
+----
+<style>
+   .red { color: red }
+</style>
+
+<script type="text/babel">
+   function getCurrentTime() {
+      return new Date().toTimeString();
+   }
+   var class_name = "red";
+   ReactDOM.render(
+      <div>
+         <p>The current time is <span className={class_name}>{getCurrentTime()}</span></p>
+      </div>,
+      document.getElementById('react-app')
+   );
+</script>
+----
+
+=== Component
+
+* React component is the building block of a React application.
+* The primary job of a React component is to render its user interface and update it whenever its internal state is changed.
+** Initial rendering
+** Event handling
+** User interface updating
+
+[plantuml,align=center,opts=inline]
+....
+@startuml
+
+class Component
+class FunctionComponent
+class ClassComponent{
+  render()
+}
+
+Component <|-- FunctionComponent
+Component <|-- ClassComponent
+
+
+@enduml
+....
+
+* Note that an element in React is not a component, but a component is comprised of multiple elements.
+* Function components are very minimal in nature. Its only requirement is to return a React element.
+
+[%nowrap, javascript]
+----
+// function component
+function Hello(){
+  return '<div>Hello</div>';
+}
+
+// class component
+class HelloComponent extends React.Component{
+  render(){
+    return ( <div>Hello</div> );
+  }
+}
+
+----
+
+
+== API
+
+[cols="*", options="header,autowidth"]
+|===
+^| Class or ^| Description ^| Members ^| Remarks
+
+| https://legacy.reactjs.org/docs/react-api.html[`React`^]
+| the entry point to the React library
+|   | global
+
+
+|===

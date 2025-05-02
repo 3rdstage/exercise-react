@@ -1,0 +1,29 @@
+{
+  // https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+  // https://www.typescriptlang.org/tsconfig
+  // https://code.visualstudio.com/docs/languages/jsconfig
+  // https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio
+
+  "compilerOptions": {
+    "target": "es2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"], // https://www.typescriptlang.org/tsconfig/#typeRoots
+    //"types": ["node", "bn.js", "chai", "mocha", "chance"],
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "declaration": true,
+    "declarationDir": "public/types",
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // https://www.typescriptlang.org/tsconfig/#lib
+    "jsx": "react", //https://www.typescriptlang.org/tsconfig/#jsx
+    "skipLibCheck": true
+  },
+  "include": ["index.ts", "**/*.tsx", "**/*.ts", "node_modules/@types"],
+  "exclude": ["node_modules", "dist", "build", "cache", "artifacts", "rollup.config.js"]
+}

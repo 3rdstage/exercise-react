@@ -16,6 +16,12 @@ export default function Square() {
         <button className="square">8</button>
         <button className="square">9</button>
       </div>
+      <div className="board-row">
+        <button className="square">10</button>
+        <button className="square">11</button>
+        <button className="square">12</button>
+      </div>
+
     </>
   );
 }

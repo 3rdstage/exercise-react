@@ -1,0 +1,26 @@
+
+# https://cspell.org/docs/dictionaries-custom/
+
+# PlantUML (https://plantuml.com/)
+plantuml
+startuml
+enduml
+startmindmap
+endmindmap
+startwbs
+endwbs
+skinparam
+
+# Database
+varchar
+varchar2
+
+# MySQL, MariaDB
+innodb
+curdate
+timestampadd
+rlike
+
+# PostgreSQL
+localtimestamp
+localtime

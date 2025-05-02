@@ -1,0 +1,19 @@
+# https://cspell.org/docs/dictionaries-custom/
+toclevels
+sectnums
+sectnumlevels
+sectanchors
+docinfo
+docinfodir
+prewrap
+imagesdir
+autowidth
+kroki
+highlightjs
+iconfont
+latexmath
+noheader
+
+# Asciidoc default stylesheet
+# https://github.com/asciidoctor/asciidoctor/blob/v2.0.x/src/stylesheets/asciidoctor.css
+.listingblock

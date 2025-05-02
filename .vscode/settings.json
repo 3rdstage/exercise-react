@@ -1,0 +1,145 @@
+{
+  // https://code.visualstudio.com/docs/reference/default-settings
+
+  "workbench.editor.revealIfOpen": false,
+
+  "editor.tabSize": 2,
+  "editor.indentSize": "tabSize",
+  "editor.detectIndentation": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.snippetSuggestions": "bottom",
+  "editor.wordBasedSuggestions": "off",
+  "editor.suggestSelection": "recentlyUsedByPrefix",
+
+  "debug.console.fontSize": 16,
+  "terminal.integrated.fontSize": 16,
+
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+
+  // https://code.visualstudio.com/docs/editor/glob-patterns#_special-cases
+  "files.exclude": {
+    "**/node_modules/*/**": true,
+    "**/node_modules/'@types'/*/**": false,
+    "**/.pytest_cache": true,
+    "run/ganache/data": true,
+    "run/geth/data": true,
+    "run/besu/data": true,
+    //"**/diag-*.svg": true,
+    //"**/diag-*.png": true
+  },
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    //"**/node_modules/**": true,
+    "**/.pytest_cache/**": true,
+    "contracts/**/artifacts/**": true,
+    "types/truffle-contracts/**": true,
+    "run/ganache/data/**": true,
+    "run/geth/data/**": true,
+    "run/besu/data/**": true,
+    //"**/diag-*.svg": true,
+    //"**/diag-*.png": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  },
+
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+  "js/ts.implicitProjectConfig.checkJs": false,
+
+  "jshint.enable" : false,
+  "jshint.config": ".jshintrc",
+  "tslint.enable": false,
+  "tslint.exclude": "tsconfig.json",
+
+  "eslint.enable": true,
+
+  "cSpell.enabled": true,
+  "cSpell.checkOnlyEnabledFileTypes" : true,
+
+  "asciidoc.extensions.enableKroki": true,
+  "asciidoc.preview.refreshInterval": 2000,
+  "asciidoc.preview.scrollPreviewWithEditor": true,
+  "asciidoc.preview.scrollEditorWithPreview": false,
+
+  "plantuml.fileExtensions": ".pu,.puml,.plantuml",
+  "plantuml.exportSubFolder": false,
+  "plantuml.exportOutDir": ".",
+
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.recipe.default" : "svg",
+  // https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-recipes
+  "latex-workshop.latex.recipes": [
+    { "name": "pdf", "tools": [ "pdflatex" ] },
+    { "name": "svg", "tools": [ "latex", "dvisvgm"] },
+    { "name": "svg2", "tools": [ "lualatex", "dvisvgm"] }
+  ],
+  // https://github.com/James-Yu/LaTeX-Workshop/wiki/Compile#latex-tools
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "latex",
+      "command": "latex", // https://linux.die.net/man/1/tex
+      "args": [
+        "-file-line-error",
+        "-halt-on-error",
+        "-output-directory=%OUTDIR%",
+        "%DOCFILE%"
+      ]
+    },
+    {
+      "name": "lualatex",
+      "command": "lualatex",
+      "args": [
+        "--output-format=dvi",
+        "--output-directory=%OUTDIR%",
+        "%DOCFILE%"
+      ]
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex", // https://linux.die.net/man/1/pdflatex
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-output-directory=%OUTDIR%",
+        "%DOC%.tex"
+      ]
+    },
+    {
+      // https://tikz.dev/drivers#sec-10.2.4
+      "name": "dvisvgm",
+      "command": "dvisvgm", // https://dvisvgm.de/Manpage/
+      "args": [
+        // "--no-fonts",
+        "--font-format=woff2", // woff | woff,autohint | woff2 | woff2,autohint
+        "--verbosity=4",
+        "%OUTDIR%/%DOCFILE%"
+      ]
+    }
+  ]
+}
