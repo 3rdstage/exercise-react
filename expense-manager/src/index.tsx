@@ -6,6 +6,7 @@ import HelloWorld from './components/HelloWorld';
 import ExpenseEntryItem from './components/ExpenseEntryItem';
 import ExpenseEntryItem2 from './components/ExpenseEntryItem2';
 import ExpenseEntryItemList from './components/ExpenseEntryItemList';
+import Welcome from './components/Welcom';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -65,4 +66,12 @@ ReactDOM.render(
     <ExpenseEntryItemList items={items} />
   </React.StrictMode>,
   document.getElementById("expenseList")
+)
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Welcome who="Tom" />
+  </React.StrictMode>,
+  document.getElementById("welcome")
+
 )

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class FormattedMoney extends React.Component{
 
@@ -17,5 +18,10 @@ class FormattedMoney extends React.Component{
     )
   }
 }
+
+FormattedMoney.PropTypes = {
+  value: PropTypes.number.isRequired
+}
+
 
 export default FormattedMoney;

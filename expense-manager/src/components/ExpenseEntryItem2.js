@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FormattedDate from './FormattedDate';
 import FormattedMoney from './FormattedMoney';
 
@@ -23,6 +24,15 @@ class ExpenseEntryItem2 extends React.Component{
       </div>
     );
   }
+}
+
+ExpenseEntryItem2.PropTypes = {
+  item: PropTypes.shape({
+    name: PropTypes.number,
+    amount: PropTypes.number.isRequired,
+    spendDate: PropTypes.string.isRequired,
+    category: PropTypes.any
+  })
 }
 
 export default ExpenseEntryItem2;

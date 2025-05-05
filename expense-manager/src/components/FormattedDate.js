@@ -8,7 +8,7 @@ class FormattedDate extends React.Component{
   }
 
   format(val){
-    return format(new Date(val), 'd-MMM-Y'); //https://date-fns.org/v4.1.0/docs/format
+    return format(new Date(val), 'd-MMM-y'); //https://date-fns.org/v4.1.0/docs/format
   }
 
   render(){

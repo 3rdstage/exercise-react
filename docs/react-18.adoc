@@ -55,7 +55,7 @@ const element = <h1>Hello React!</h1>
 </script>
 ....
 
-[%nowrap, javascript]
+[source, html]
 ----
 <style>
    .red { color: red }
@@ -83,6 +83,7 @@ const element = <h1>Hello React!</h1>
 ** Event handling
 ** User interface updating
 
+// https://github.com/asciidoctor/asciidoctor-kroki?tab=readme-ov-file#usage
 [plantuml,align=center,opts=inline]
 ....
 @startuml
@@ -92,6 +93,7 @@ class FunctionComponent
 class ClassComponent{
   render()
 }
+class NestedComponent
 
 Component <|-- FunctionComponent
 Component <|-- ClassComponent
@@ -103,7 +105,7 @@ Component <|-- ClassComponent
 * Note that an element in React is not a component, but a component is comprised of multiple elements.
 * Function components are very minimal in nature. Its only requirement is to return a React element.
 
-[%nowrap, javascript]
+[source, javascript]
 ----
 // function component
 function Hello(){
@@ -116,13 +118,58 @@ class HelloComponent extends React.Component{
     return ( <div>Hello</div> );
   }
 }
-
 ----
 
+=== PropTypes
+
+* React community provides a special package, `prop-types` to address the properties type mismatch problem.
+* `prop-types` allows the properties of the component to be specified with type through a custom setting (propTypes) inside the component.
+
+* Typescript : compile-time type checking
+* prop-types : runtime type checking
+
+[source, javascript]
+----
+import React from 'react';
+import PropTypes from 'prop-types';
+
+class FormattedMoney extends React.Component{
+
+  constructor(props){
+    super(props);
+
+  }
+
+  format(amount){
+    return parseFloat(amount).toFixed(2);
+  }
+
+  render(){
+    return(
+      <span>{this.format(this.props.value)}</span>
+    )
+  }
+}
+
+FormattedMoney.PropTypes = {
+  value: PropTypes.number.isRequired
+}
+----
+
+* https://hygraph.com/blog/react-proptypes[*How to use PropTypes in React*^]
+
+
+
+
+=== Misc
+
+* React toolchain will pre-process the css files ending with .module.css through CSS Module. Otherwise, it will be considered as a normal stylesheet.
+* In short, the Props passed to a component are Read-Only.
+* The concept of state allows React components to change their result as a response to changing user actions, network responses, etc. without violating this rule.
 
 == API
 
-[cols="*", options="header,autowidth"]
+[.ml-8, cols="*", options="header,autowidth"]
 |===
 ^| Class or ^| Description ^| Members ^| Remarks
 
@@ -130,5 +177,46 @@ class HelloComponent extends React.Component{
 | the entry point to the React library
 |   | global
 
+| https://legacy.reactjs.org/docs/react-component.html[`React.Component`^]
+|   | `render()`, `constructor(__props__)` |
+
+| https://legacy.reactjs.org/docs/react-dom.html[`ReactDOM`]
+|   |   |
+|===
+
+=== Packages
+
+[.ml-8, cols="*", options="header,autowidth"]
+|===
+^| Package ^| Description ^| Elements ^| Remarks
+
+| https://www.npmjs.com/package/react[`react`^]
+| a JavaScript library for creating user interfaces.
+|   | facebook
+
+| https://www.npmjs.com/package/react-dom[`react-dom`^]
+| the entry point to the DOM and server renderers for React.
+|   | facebook
+
+| https://github.com/facebook/prop-types[`prop-types`^]
+| Runtime type checking for React props and similar objects.
+|   | facebook, MIT
+
+| https://www.npmjs.com/package/react-error-boundary[`react-error-boundary`^]
+| Reusable React error boundary component. |   |
+
+| https://www.npmjs.com/package/@types/react[`@types/react`^]
+| type definitions for react |   |
+
+| https://www.npmjs.com/package/@types/react-dom[`@types/react-dom`^]
+| type definitions for react-dom |   |
+
+| https://www.npmjs.com/package/@types/prop-types[`@types/prop-types`^]
+| type definitions for prop-types |   |
 
 |===
+
+== Guides
+
+* https://wormwlrm.github.io/2021/11/07/Rollup-React-TypeScript.html[Rollup 기반 라이브러리 개발 환경 구성하기^]
+* https://suzzeong.tistory.com/115[날짜 라이브러리 비교(Day.js, Moment.js, date-fns, Luxon)^]

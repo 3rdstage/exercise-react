@@ -4,25 +4,44 @@
 <head>
   <meta charset="utf-8">
   <title>Expense Manager</title>
+
+  <!-- Using TailwindCSS(https://tailwindcss.com/) -->
+  <!-- https://tailwindcss.com/docs/installation/play-cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    h3 { margin-top: 1em; }
+
+    /* revert default list bullet style */
+    /* https://github.com/tailwindlabs/tailwindcss.com/issues/850 */
+    @layer base {
+      ul, ol {
+        list-style: revert;
+    }
+  }
+  </style>
 </head>
 
 <body>
   <div id="root"></div>
 
   <h3>Example using </h3>
-  <div id="time"></div>
+  <div id="time" class="border-1 border-dashed m-4 p-2"></div>
 
   <h3>Example using ...</h3>
-  <div id="time2"></div>
+  <div id="time2" class="border-1 border-dashed m-4 p-2"></div>
 
   <h3>Example using React component</h3>
-  <div id="expense"></div>
+  <div id="expense" class="border-1 border-dashed m-4 p-2"></div>
 
   <h3>Example using React component with nested component</h3>
-  <div id="expense2"></div>
+  <div id="expense2" class="border-1 border-dashed m-4 p-2"></div>
 
   <h3>Example using React component with listing</h3>
-  <div id="expenseList"></div>
+  <div id="expenseList" class="m-4 p-2"></div>
+
+  <h3>Example using React component with State</h3>
+  <div id="welcome"  class="border-1 border-dashed m-4 p-2"></div>
 
   <script type="text/JavaScript" src="./index.js"></script>
 
