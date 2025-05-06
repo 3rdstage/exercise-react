@@ -6,7 +6,9 @@ import HelloWorld from './components/HelloWorld';
 import ExpenseEntryItem from './components/ExpenseEntryItem';
 import ExpenseEntryItem2 from './components/ExpenseEntryItem2';
 import ExpenseEntryItemList from './components/ExpenseEntryItemList';
-import Welcome from './components/Welcom';
+import Welcome from './components/Welcome';
+import Clock from './components/Clock';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -74,4 +76,11 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("welcome")
 
+)
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Clock/>
+  </React.StrictMode>,
+  document.getElementById('clock')
 )

@@ -3,13 +3,13 @@ import type { ExpenseItemValue } from './types';
 import './ExpenseEntryItemList.css';
 
 // https://www.tutorialspoint.com/reactjs/reactjs_component_collection.htm
-class ExpenseEntryItemList extends React.Component{
+class ExpenseEntryItemList extends React.Component<{items: any}, any>{
 
   constructor(props: any){
     super(props);
   }
 
-  render(){
+  override render(){
     //@ts-ignore
     const list = this.props.items.map((item: ExpenseItemValue) =>
       <tr key={item.id}>

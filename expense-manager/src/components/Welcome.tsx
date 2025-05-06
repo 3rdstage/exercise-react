@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Welcome extends React.Component {
+class Welcome extends React.Component<{who: string}, {welcomeMessage: string}>{
 
   constructor(props: any){
     super(props);
@@ -18,7 +18,7 @@ class Welcome extends React.Component {
     }));
   }
 
-  render(){
+  override render(){
     return(
       <div>
         <div><h3>{this.state.welcomeMessage}, {this.props.who}</h3></div>

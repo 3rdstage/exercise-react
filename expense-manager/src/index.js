@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import HelloWorld from './components/HelloWorld';
 import ExpenseEntryItem from './components/ExpenseEntryItem';
 import ExpenseEntryItem2 from './components/ExpenseEntryItem2';
+import Clock from './components/Clock';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -43,4 +44,12 @@ ReactDOM.render(
     <ExpenseEntryItem2 item={item}/>
   </React.StrictMode>,
   document.getElementById('expense2')
+)
+
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Clock/>
+  </React.StrictMode>,
+  document.getElementById('clock')
 )

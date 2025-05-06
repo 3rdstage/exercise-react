@@ -18,6 +18,10 @@
       ul, ol {
         list-style: revert;
     }
+
+    div.example{
+      @apply border-1 border-dashed m-4 p-2
+    }
   }
   </style>
 </head>
@@ -25,23 +29,26 @@
 <body>
   <div id="root"></div>
 
-  <h3>Example using </h3>
+  <h3>Simple Component</h3>
   <div id="time" class="border-1 border-dashed m-4 p-2"></div>
 
-  <h3>Example using ...</h3>
+  <h3>Simple Component</h3>
   <div id="time2" class="border-1 border-dashed m-4 p-2"></div>
 
-  <h3>Example using React component</h3>
+  <h3>Simple Component</h3>
   <div id="expense" class="border-1 border-dashed m-4 p-2"></div>
 
-  <h3>Example using React component with nested component</h3>
+  <h3>Component with Nested Component</h3>
   <div id="expense2" class="border-1 border-dashed m-4 p-2"></div>
 
-  <h3>Example using React component with listing</h3>
+  <h3>Component with Listing</h3>
   <div id="expenseList" class="m-4 p-2"></div>
 
-  <h3>Example using React component with State</h3>
+  <h3>Component with State</h3>
   <div id="welcome"  class="border-1 border-dashed m-4 p-2"></div>
+
+  <h3>Component with State Update</h3>
+  <div id="clock" class="border-1 border-dashed m-4 p-2"></div>
 
   <script type="text/JavaScript" src="./index.js"></script>
 

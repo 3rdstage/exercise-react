@@ -159,13 +159,86 @@ FormattedMoney.PropTypes = {
 * https://hygraph.com/blog/react-proptypes[*How to use PropTypes in React*^]
 
 
+=== Event Handler
 
+* Typical Sample
+.. Add a button with an onClick event
+.. Set ``this.changeMessageHandler`` method as onClick event handler
+.. Bind the event handler, `this.changeMessageHandler` in the constructor
+.. Added the event handler and updated the state using `this.setState`.
+
+
+=== Component Lifecycle
+
+[cols="*", width=95%, options="header,autowidth"]
+|===
+^| Stage ^| Event Handler ^| Description ^| Remarks
+
+.4+| Mounting | `constructor()`
+| Invoked during the initial construction phase of the React component. Used to set initial **state** and **properties** of the component. |
+
+| `getDerivedStateFromProps()` |   |
+
+| `render()`
+| Invoked after the construction of the component is completed. It renders the component in the virtual DOM instance. |
+
+| `componentDidMount()`
+| Invoked after the initial mounting of the component in the DOM tree. It is the good place to call API endpoints and to do network requests. |
+
+.5+| Updating | `shouldComponentUpdate(__nextProps__, __nextState__)`
+| Invoked during the update phase. Used to specify whether the component should update or not. |
+
+| `getDerivedStateFromProps(__props__, __state__)`
+| Invoked during both initial and update phase and just before the render() method. It returns the new state object. It is rarely used where the changes in properties results in state change. |
+
+| `render()` |   |
+
+| `getSnapshotBeforeUpdate(__prevProps__, __prevState__)`
+| Invoked just before the rendered content is committed to DOM tree. It is mainly used to get some information about the new content. |
+
+| `componentDidUpdate(__prevProps__, __prevState__, __snapshot__)`
+| Network request can be done during this phase but only when there is difference in component's current and previous properties. |
+
+| Unmounting
+| `componentWillUnmount()`
+| Invoked after the component is unmounted from the DOM. This is the good place to clean up the object. |
+
+|===
+
+=== Typescript
+
+* An empty interface, ``{}`` and ``Object`` all represent "any non-nullish value"—not "an empty object" as you might think. Using these types is a common source of misunderstanding and is not recommended.
 
 === Misc
 
 * React toolchain will pre-process the css files ending with .module.css through CSS Module. Otherwise, it will be considered as a normal stylesheet.
 * In short, the Props passed to a component are Read-Only.
 * The concept of state allows React components to change their result as a response to changing user actions, network responses, etc. without violating this rule.
+
+
+== References
+
+=== JavaScript
+
+* https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval[`setInterval(_func_, _delay_[, _arg1_, _arg2_, ..., _argN_\])`^]
+** Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
+** Returns a positive integer (typically within the range of 1 to 2,147,483,647) that uniquely identifies the interval timer created by the call
+
+* https://developer.mozilla.org/en-US/docs/Web/API/Window/clearInterval[`clearInterval(_intervalID_)`^]
+** Cancels a timed, repeating action which was previously established by a call to `setInterval()`.
+
+* https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout[`setTimeout(_func_, _delay_[, _arg1_, _arg2_, ..., _argN_\])`^]
+** Sets a timer which executes a function or specified piece of code once the timer expires.
+** Returns a positive integer (typically within the range of 1 to 2,147,483,647) that uniquely identifies the timer created by the call.
+
+* https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout[`clearTimeout(_timeoutID_)`^]
+** Cancels a timeout previously established by calling `setTimeout()`.
+
+=== Typescript
+
+* https://www.typescriptlang.org/docs/handbook/react.html[React - Typescript Documentation^]
+* https://react-typescript-cheatsheet.netlify.app/docs/basic/setup[React TypeScript Cheatsheet^]
+
 
 == API
 
@@ -183,6 +256,42 @@ FormattedMoney.PropTypes = {
 | https://legacy.reactjs.org/docs/react-dom.html[`ReactDOM`]
 |   |   |
 |===
+
+[source, typescript]
+----
+// https://legacy.reactjs.org/docs/react-component.html
+class React.Component{
+
+  // the props that were defined by the caller of this component.
+  props: {};
+
+  // data specific to this component that may change over time.
+  state: {};
+
+  // set the default props for the class.
+  defaultProps: {};
+
+  constructor(props);
+
+  static getDerivedStateFromProps(props, state);
+
+  render();
+
+  componentDidMount();
+
+  shouldComponentUpdate(nextProps, nextState);
+
+  getSnapshotBeforeUpdate(prevProps, prevState);
+
+  componentDidUpdate(prevProps, prevState, snapshot);
+
+  componentWillUnmount();
+
+  // This is the primary method you use to update the user interface in response to event handlers and server responses.
+  setState(updater: (state, props) => state[, callback]);
+}
+
+----
 
 === Packages
 
@@ -216,7 +325,41 @@ FormattedMoney.PropTypes = {
 
 |===
 
+
+== Libraries
+
+[cols="*", width=95%, options="header, autowidth"]
+|===
+
+^| Library ^| License ^| Description ^| Remarks
+
+| https://mui.com/[Material UI^] | Community: MIT, Pro/Premium: Commercial
+| a comprehensive library of React components that features our independent implementation of Google's Material Design system. |
+
+| https://react-bootstrap.github.io/[React Bootstrap^] | MIT
+| Bootstrap 5 components built with React. |
+
+| https://ant.design/[Ant Design^] | MIT
+| An enterprise-class UI design language and React UI library. |
+
+| https://ui.shadcn.com/[shadcn/ui^] | MIT
+| a set of beautifully-designed, accessible components and a code distribution platform.
+| headless UI
+
+| https://headlessui.com/[Headless UI^] | MIT
+| A set of completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS. | headless UI, Tailwind CSS
+
+|===
+
+* https://www.syncfusion.com/blogs/post/top-react-component-libraries[Top 10 React Component Libraries Every Developer Should Know] (Dec 10, 2024)
+* https://www.robinwieruch.de/react-libraries/[React Libraries for 2025^] (February 17, 2025)
+
+
 == Guides
 
 * https://wormwlrm.github.io/2021/11/07/Rollup-React-TypeScript.html[Rollup 기반 라이브러리 개발 환경 구성하기^]
 * https://suzzeong.tistory.com/115[날짜 라이브러리 비교(Day.js, Moment.js, date-fns, Luxon)^]
+
+* https://bobbyhadz.com/blog/react-property-does-not-exist-on-type-readonly[React: Property 'X' does not exist on type 'Readonly<{}>'^] (Jan 15, 2023)
+
+* https://github.com/tailwindlabs/tailwindcss/discussions/5258[Unknown at rule @apply css(unknownAtRules)^]

@@ -12,8 +12,10 @@
     //"types": ["node", "bn.js", "chai", "mocha", "chance"],
     "strict": true,
     "alwaysStrict": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
+    "noImplicitAny": true,  // https://www.typescriptlang.org/tsconfig/#noImplicitAny
+    "noImplicitOverride": true, // https://www.typescriptlang.org/tsconfig/#noImplicitOverride
+    //"noImplicitReturns" : true, // https://www.typescriptlang.org/tsconfig/#noImplicitReturns
+    "noImplicitThis": true, // https://www.typescriptlang.org/tsconfig/#noImplicitThis
     "declaration": true,
     "declarationDir": "public/types",
     "emitDeclarationOnly": false,
