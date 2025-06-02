@@ -12,13 +12,15 @@
 :table-frame: ends
 :table-stripes: none
 :imagesdir: ./
+// https://docs.asciidoctor.org/diagram-extension/latest/output/
 :imagesoutdir: ./resources
+:diagram-cachedir: ./cache
 :docinfo: shared-head
 :docinfodir: ../
 :source-highlighter: highlight.js
 :source-indent: 2
 :highlightjs-theme: github
-//:prewrap!:
+//:!prewrap:
 :icons: font
 :iconfont-name: font-awesome
 :iconfont-remote:
@@ -26,12 +28,26 @@
 :stem: latexmath
 
 // https://github.com/asciidoctor/asciidoctor-kroki
-:kroki-fetch-diagram: true
+// :kroki-fetch-diagram: false
 :kroki-default-format: svg
 :kroki-default-options: inline
 :kroki-server-url: https://kroki.io
-// :plantuml-server-url: "http://plantuml.com/plantuml"
+:plantuml-server-url: "http://plantuml.com/plantuml"
 
+[pass]
+++++
+<style type="text/tailwindcss">
+  /*
+  https://www.w3.org/TR/selectors-3/#selectors (CSS3 Selectors)
+  https://tailwindcss.com/docs
+  */
+
+  h3 { margin-top: 1em; }
+  h4 { margin-top: 2em; }
+
+  .listingblock pre.highlightjs { @apply text-lg border-1 border-dotted ml-4 }
+</style>
+++++
 
 == Concepts
 
@@ -44,7 +60,7 @@
 * JSX supports expression to be specified inside the attributes. In attributes, **double quote should not be used** along with expression.
 
 [source, javascript]
-....
+----
 const element = <h1>Hello React!</h1>
 
 <script type="text/babel">
@@ -53,7 +69,7 @@ const element = <h1>Hello React!</h1>
     <div><p>The current time is {cTime}</p></div>,
     document.getElementById('react-app') );
 </script>
-....
+----
 
 [source, html]
 ----
@@ -156,21 +172,104 @@ FormattedMoney.PropTypes = {
 }
 ----
 
+* https://github.com/facebook/prop-types?tab=readme-ov-file#usage[PropTypes(`prop-types`) Usage]
+
+[col="*", width=95%, role="ml-8", options="header, autowidth"]
+|===
+^| Type ^| Description ^| Examples ^| Remarks
+
+| `PropTypes.array` |    |   | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array[`Array`^]
+
+| `PropTypes.bigint` | JavaScript `bigint` primitive  |
+| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt[`BigInt`^]
+
+| `PropTypes.bool` | JavaScript `boolean` primitive |
+| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean[`Boolean`^]
+
+| `PropTypes.func` |   |   | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function[`Function`^]
+
+| `PropTypes.number` | JavaScript `number` primitive  |
+| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number[`Number`^]
+
+| `PropTypes.object` |   |   | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object[`Object`^]
+
+| `PropTypes.string` | JavaScript `string` primitive |
+| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String[`String`^]
+
+| `PropTypes.symbol` | JavaScript `symbol` primitive |
+| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol[`Symbol`^]
+
+| `PropTypes.node` | Anything that can be rendered |  |
+
+| `PropTypes.element` | A React element |   |
+
+| `PropTypes.elementType` | A React element type |   |
+
+| `PropTypes.instanceOf(__clazz__)` | an instance of a class |   |
+
+| `PropTypes.oneOf(__arr__)` | an enum
+| `PropTypes.oneOf(['News', 'Photos'])` |
+
+| `PropTypes.oneOfType(__arr__)` | could be one of many types
+| `PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.instanceOf(Message)])` |
+
+| `PropTypes.arrayOf(__type__)` | An array of a certain type
+| `PropTypes.arrayOf(PropTypes.number)`  |
+
+| `PropsType.objectOf(__type__)` |   |   |
+
+| `PropTypes.shape(__obj__)` | An object taking on a particular shape |   |
+
+| `PropTypes.exact(__obj__)` | An object with warnings on extra properties |   |
+
+| `PropTypes.any` | A value of any data type |   |
+|===
+
 * https://hygraph.com/blog/react-proptypes[*How to use PropTypes in React*^]
 
 
-=== Event Handler
+=== State
 
-* Typical Sample
-.. Add a button with an onClick event
-.. Set ``this.changeMessageHandler`` method as onClick event handler
-.. Bind the event handler, `this.changeMessageHandler` in the constructor
-.. Added the event handler and updated the state using `this.setState`.
+* The internal data represents the state of a React component and can be accessed using `this.state` member variable of the component.
+* Whenever the state of the component is changed, the component will re-render itself by calling the `render()` method along with the new state. (reactive)
+* React components have a [.underline]**built-in state object**. The state object is used to store all the property values that belong to the component in which this state is defined.
+
+* React provides a [.underline]**single** API to maintain state in the component. The API is **`this.setState()`**. It accepts either a JavaScript object or a function that returns a JavaScript object.
+
+* React **recommends** to use setState API with [.underline]**function** as it works correctly [.underline]##in async environment##. Instead of lambda function, normal JavaScript function can be used as well.
+
+[source, typescript]
+----
+  this.setState( (state, props) =>
+      ... function returning JavaScript object ...);
+
+  this.setState( function(state, props) {
+      return ... JavaScript object ...
+  }
+----
+
+[source, typescript]
+----
+  setState<K extends keyof S>(
+              state: ((prevState: Readonly<S>, props: Readonly<P>) => Pick<S, K> | S | null) | (Pick<S, K> | S | null),
+              callback?: () => void,
+          ): void;
+----
+
+=== Constructor
+
+* In React, `constructor` is used for **state initialization** and **event binding** purposes as well.
+
+* Initialization of props
+* Initialization of the state
+** Using `this.state = obj`
+** Using `this.state.*`
+** Using `this.setState()`
 
 
 === Component Lifecycle
 
-[cols="*", width=95%, options="header,autowidth"]
+[cols="*", width=95%, options="header,autowidth", role="ml-8"]
 |===
 ^| Stage ^| Event Handler ^| Description ^| Remarks
 
@@ -202,12 +301,108 @@ FormattedMoney.PropTypes = {
 | Unmounting
 | `componentWillUnmount()`
 | Invoked after the component is unmounted from the DOM. This is the good place to clean up the object. |
+|===
+
+
+=== Event Handler
+
+* Typical Sample
+.. Add a button with an onClick event
+.. Set ``this.changeMessageHandler`` method as onClick event handler
+.. Bind the event handler, `this.changeMessageHandler` in the constructor
+.. Added the event handler and updated the state using `this.setState`.
+
+
+* https://www.freecodecamp.org/news/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb/[**This is why we need to bind event handlers in Class Components in React**^]
+** __In Class Components in React, when we pass the event handler function reference as a callback, the event handler method **loses its implicitly bound context**. When the event occurs and the handler is invoked, the `this` value **falls back to default binding** and is set to `undefined` , as class declarations and prototype methods run in strict mode.__
+** __When we bind the `this` of the event handler to the component instance in the constructor, we can **pass it as a callback** without worrying about it losing its context.__
+
+
+=== Event
+
+* https://17.reactjs.org/docs/events.html[React v17 SyntheticEvent]
+
+* Event Types
+** Mouse Events
+** Keyboard Events
+** Focus Events
+
+* Synthetic Event
+** a simple cross-browser wrapper for native event instances making the events work identically across all browsers.
+
+[cols="*", options="header, autowidth", role="ml-8"]
+|===
+^| Event ^| Callbacks ^| Properties ^| Remarks
+
+| `ClipboardEvent` | `onCopy`, `onCut`, `onPaste` |   |
+
+| `CompositionEvent` | `onCompositionStart`, `onCompositionEnd`, `onCompositionUpdate` | `string data` |
+
+| `KeyboardEvent` | `onKeyPress`, `onKeyDown`, `onKeyUp` |   |
+
+| `FocusEvent` | `onFocus`, `onBlur` |   |
 
 |===
+
+// https://mermaid.js.org/syntax/classDiagram.html
+[mermaid,synthetic-event.svg]
+....
+classDiagram
+  class SyntheticEvent{
+    boolean bubbles
+  }
+
+....
 
 === Typescript
 
 * An empty interface, ``{}`` and ``Object`` all represent "any non-nullish value"—not "an empty object" as you might think. Using these types is a common source of misunderstanding and is not recommended.
+
+==== Types
+
+[cols="*", width=95%, options="header, autowidth", role="ml-8"]
+|===
+^| Type ^| Description ^| Remarks
+
+| `React.Component<__PropsType__, __StateType__>` |   |
+| `React.SyntheticEvent` |   |
+| `React.MouseEvent` |   |
+| `React.KeyboardEvent` |    |
+
+|===
+
+==== React v17 Types
+
+* https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/v17/index.d.ts
+
+[%nowrap, typescript, role="!text-nowrap !whitespace-nowrap !ml-4"]
+----
+
+class Component<P, S>{
+  ...
+}
+
+class PureComponent<P = {}, S = {}, SS = any> extends Component<P, S, SS> {}
+
+interface FunctionComponent<P = {}> {
+  ...
+}
+
+interface ComponentLifecycle<P, S, SS = any> extends NewLifecycle<P, S, SS>, DeprecatedLifecycle<P, S> {
+  ...
+}
+
+interface BaseSyntheticEvent<E = object, C = any, T = any>{
+  ...
+}
+
+interface SyntheticEvent<T = Element, E = Event> extends BaseSyntheticEvent<E, EventTarget & T, EventTarget>{}
+
+interface ClipboardEvent<T = Element> extends SyntheticEvent<T, NativeClipboardEvent>{
+  ...
+}
+----
+
 
 === Misc
 
@@ -220,6 +415,7 @@ FormattedMoney.PropTypes = {
 
 === JavaScript
 
+==== `setInterval(), setTimeout()`
 * https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval[`setInterval(_func_, _delay_[, _arg1_, _arg2_, ..., _argN_\])`^]
 ** Repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.
 ** Returns a positive integer (typically within the range of 1 to 2,147,483,647) that uniquely identifies the interval timer created by the call
@@ -233,6 +429,21 @@ FormattedMoney.PropTypes = {
 
 * https://developer.mozilla.org/en-US/docs/Web/API/Window/clearTimeout[`clearTimeout(_timeoutID_)`^]
 ** Cancels a timeout previously established by calling `setTimeout()`.
+
+==== `Function.prototype.bind()`
+
+* The most common use of `bind()` is to make a function that, no matter how it is called, is called with a particular `this` value.
+
+* https://www.freecodecamp.org/news/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb/[This is why we need to bind event handlers in Class Components in React^] (May 4, 2018)
+** We can figure out that when we call `setTimeout`, JavaScript internally assigns `obj.display` to its argument `callback`. This assignment operation, as we have seen before, causes the `display()` function to lose its context. To avoid this, we can explicitly hard bind the this value to a function by using the `bind()` method.
+
+* https://www.freecodecamp.org/news/the-complete-guide-to-this-in-javascript/[The Complete Guide to this in JavaScript^] (January 18, 2020)
+
+==== Misc
+
+* Modules have been introduced in ECMAScript 2015.
+* Modules are implicitly in strict mode.
+
 
 === Typescript
 
@@ -295,7 +506,7 @@ class React.Component{
 
 === Packages
 
-[.ml-8, cols="*", options="header,autowidth"]
+[cols="*", options="header,autowidth", role="ml-8"]
 |===
 ^| Package ^| Description ^| Elements ^| Remarks
 
@@ -328,7 +539,7 @@ class React.Component{
 
 == Libraries
 
-[cols="*", width=95%, options="header, autowidth"]
+[cols="*", width=95%, options="header, autowidth", role="ml-8"]
 |===
 
 ^| Library ^| License ^| Description ^| Remarks

@@ -11,7 +11,11 @@ class Welcome extends React.Component<{who: string}, {welcomeMessage: string}>{
     this.changeMessageHandler = this.changeMessageHandler.bind(this);
   }
 
-  changeMessageHandler(){
+  changeMessageHandler(ev: React.SyntheticEvent){
+    console.log("Event is fired");
+    console.log("   Event target: " + ev.target);
+    //console.log("   Event extra: " + extra);
+
     this.setState(prevState => ({
       /* @ts-ignore */
       welcomeMessage: prevState.welcomeMessage == "Hello" ? "Welcome" : "Hello"
