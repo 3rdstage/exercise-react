@@ -238,6 +238,8 @@ FormattedMoney.PropTypes = {
 
 * React **recommends** to use setState API with [.underline]**function** as it works correctly [.underline]##in async environment##. Instead of lambda function, normal JavaScript function can be used as well.
 
+* A special feature of React state API is that it will be [.underline]**merged** with the existing state instead of replacing the state.
+
 [source, typescript]
 ----
   this.setState( (state, props) =>

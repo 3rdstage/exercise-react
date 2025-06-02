@@ -40,6 +40,7 @@ class ExpenseEntryItemList extends
   handleRemove(id: number, ev: React.MouseEvent){
     console.log(`Removing item ${id}`)
 
+    ev.preventDefault(); // What for?
     this.setState((state, props) => {
         return { items : state.items.filter((item) => (item.id != id)) }
     })

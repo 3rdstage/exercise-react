@@ -40,7 +40,7 @@ export default {
       livereload('public'),
       serve({  // https://github.com/thgh/rollup-plugin-serve
          contentBase: 'public',
-         host: 'localhost',
+         host: "127.0.0.1",
          verbose: true,
          port: 3000,
          open: true,  // Launch in browser (default: false)

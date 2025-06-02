@@ -17,9 +17,11 @@
     //"noImplicitReturns" : true, // https://www.typescriptlang.org/tsconfig/#noImplicitReturns
     "noImplicitThis": true, // https://www.typescriptlang.org/tsconfig/#noImplicitThis
     "declaration": true,
-    "declarationDir": "public/types",
+    "declarationDir": "public/types", // https://www.typescriptlang.org/tsconfig/#declarationDir
+    "declarationMap": true, // https://www.typescriptlang.org/tsconfig/#declarationMap
     "emitDeclarationOnly": false,
     "sourceMap": true,
+    "outDir": "public", // https://www.typescriptlang.org/tsconfig/#outDir
     "allowJs": true,
     "esModuleInterop": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"], // https://www.typescriptlang.org/tsconfig/#lib
@@ -27,5 +29,5 @@
     "skipLibCheck": true
   },
   "include": ["index.ts", "**/*.tsx", "**/*.ts", "node_modules/@types"],
-  "exclude": ["node_modules", "dist", "build", "cache", "artifacts", "rollup.config.js"]
+  "exclude": ["node_modules", "public", "dist", "build", "cache", "artifacts", "rollup.config.js"]
 }
