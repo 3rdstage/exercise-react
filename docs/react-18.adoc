@@ -234,19 +234,19 @@ FormattedMoney.PropTypes = {
 * Whenever the state of the component is changed, the component will re-render itself by calling the `render()` method along with the new state. (reactive)
 * React components have a [.underline]**built-in state object**. The state object is used to store all the property values that belong to the component in which this state is defined.
 
-* React provides a [.underline]**single** API to maintain state in the component. The API is **`this.setState()`**. It accepts either a JavaScript object or a function that returns a JavaScript object.
+* React provides a [.underline]**single** API to maintain state in the component. The API is `this.setState()`. It accepts either a JavaScript object or a function that returns a JavaScript object.
 
 * React **recommends** to use setState API with [.underline]**function** as it works correctly [.underline]##in async environment##. Instead of lambda function, normal JavaScript function can be used as well.
 
 * A special feature of React state API is that it will be [.underline]**merged** with the existing state instead of replacing the state.
 
-[source, typescript]
+
+[source, plaintext]
 ----
-  this.setState( (state, props) =>
-      ... function returning JavaScript object ...);
+  this.setState( (state, props) => function returning JavaScript object);
 
   this.setState( function(state, props) {
-      return ... JavaScript object ...
+      return JavaScript object
   }
 ----
 
@@ -257,6 +257,7 @@ FormattedMoney.PropTypes = {
               callback?: () => void,
           ): void;
 ----
+
 
 === Constructor
 
@@ -310,14 +311,14 @@ FormattedMoney.PropTypes = {
 
 * Typical Sample
 .. Add a button with an onClick event
-.. Set ``this.changeMessageHandler`` method as onClick event handler
+.. Set `this.changeMessageHandler` method as onClick event handler
 .. Bind the event handler, `this.changeMessageHandler` in the constructor
 .. Added the event handler and updated the state using `this.setState`.
 
 
 * https://www.freecodecamp.org/news/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb/[**This is why we need to bind event handlers in Class Components in React**^]
-** __In Class Components in React, when we pass the event handler function reference as a callback, the event handler method **loses its implicitly bound context**. When the event occurs and the handler is invoked, the `this` value **falls back to default binding** and is set to `undefined` , as class declarations and prototype methods run in strict mode.__
-** __When we bind the `this` of the event handler to the component instance in the constructor, we can **pass it as a callback** without worrying about it losing its context.__
+** __In Class Components in React, when we pass the event handler function reference as a callback, the event handler method **loses its implicitly bound context**. When the event occurs and the handler is invoked, the *`this`* value falls back to **default binding** and is set to `undefined`, as class declarations and prototype methods run in `strict` mode.__
+** __When we bind the *`this`* of the event handler to the component instance in the constructor, we can pass it as a callback without worrying about it losing its context.__
 
 
 === Event
@@ -355,6 +356,10 @@ classDiagram
   }
 
 ....
+
+=== Hooks
+
+* React Hooks enable React *_functional component_* to have its own state and life-cycle.
 
 === Typescript
 
